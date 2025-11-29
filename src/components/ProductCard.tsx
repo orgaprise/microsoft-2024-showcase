@@ -1,30 +1,55 @@
 import { motion } from "framer-motion";
+import { ShoppingCart, ExternalLink } from "lucide-react";
 
 interface ProductCardProps {
   image: string;
   title: string;
   description: string;
+  price: string;
+  originalPrice?: string;
+  badge?: string;
+  buyLink: string;
   index: number;
   onClick: () => void;
 }
 
-const ProductCard = ({ image, title, description, index, onClick }: ProductCardProps) => {
+const ProductCard = ({ 
+  image, 
+  title, 
+  description, 
+  price, 
+  originalPrice, 
+  badge,
+  buyLink,
+  index, 
+  onClick 
+}: ProductCardProps) => {
   return (
     <motion.article
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ 
         duration: 0.5, 
-        delay: index * 0.1,
+        delay: index * 0.08,
         ease: [0.4, 0, 0.2, 1]
       }}
-      whileHover={{ y: -8 }}
-      className="group cursor-pointer"
-      onClick={onClick}
+      className="group relative"
     >
-      <div className="relative overflow-hidden rounded-2xl bg-card shadow-card transition-all duration-500 hover:shadow-card-hover">
+      <div className="relative overflow-hidden rounded-2xl bg-card border border-border/50 shadow-card transition-all duration-500 hover:shadow-card-hover hover:border-primary/20">
+        {/* Badge */}
+        {badge && (
+          <div className="absolute left-3 top-3 z-10">
+            <span className="inline-flex items-center rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground shadow-lg">
+              {badge}
+            </span>
+          </div>
+        )}
+
         {/* Image Container */}
-        <div className="relative aspect-[4/3] overflow-hidden bg-secondary/50">
+        <div 
+          className="relative aspect-[4/3] overflow-hidden bg-secondary/30 cursor-pointer"
+          onClick={onClick}
+        >
           <img
             src={image}
             alt={title}
@@ -35,11 +60,10 @@ const ProductCard = ({ image, title, description, index, onClick }: ProductCardP
           {/* Overlay on Hover */}
           <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
           
-          {/* View Button */}
+          {/* Quick View */}
           <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-all duration-500 group-hover:opacity-100">
             <motion.div
-              initial={{ scale: 0.8 }}
-              whileHover={{ scale: 1 }}
+              whileHover={{ scale: 1.1 }}
               className="flex h-14 w-14 items-center justify-center rounded-full bg-card/95 shadow-lg backdrop-blur-sm"
             >
               <svg
@@ -65,12 +89,33 @@ const ProductCard = ({ image, title, description, index, onClick }: ProductCardP
 
         {/* Content */}
         <div className="p-5">
-          <h3 className="font-display text-lg font-semibold text-foreground transition-colors group-hover:text-primary">
+          <h3 className="font-display text-lg font-semibold text-foreground transition-colors group-hover:text-primary line-clamp-1">
             {title}
           </h3>
-          <p className="mt-1.5 text-sm text-muted-foreground line-clamp-2">
+          <p className="mt-1.5 text-sm text-muted-foreground line-clamp-2 min-h-[40px]">
             {description}
           </p>
+
+          {/* Price */}
+          <div className="mt-4 flex items-baseline gap-2">
+            <span className="font-display text-2xl font-bold text-primary">{price}</span>
+            {originalPrice && (
+              <span className="text-sm text-muted-foreground line-through">{originalPrice}</span>
+            )}
+          </div>
+
+          {/* Buy Button */}
+          <a
+            href={buyLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:scale-[0.98]"
+          >
+            <ShoppingCart className="h-4 w-4" />
+            Buy Now
+            <ExternalLink className="h-3.5 w-3.5 opacity-60" />
+          </a>
         </div>
       </div>
     </motion.article>
