@@ -17,12 +17,14 @@ const Header = () => {
               <span className="hidden sm:inline">sales@example.com</span>
             </a>
           </div>
-          <div className="flex items-center gap-2">
-            <img
-              src="https://img.shields.io/badge/Microsoft-Certified_Partner-0078D4?style=flat&logo=microsoft"
-              alt="Microsoft Certified Partner"
-              className="h-5"
-            />
+          <div className="flex items-center gap-3">
+            <a href="/blog" className="hover:opacity-80 transition-opacity">
+              Blog
+            </a>
+            <div className="h-3 w-px bg-primary-foreground/30" />
+            <a href="/help" className="hover:opacity-80 transition-opacity">
+              Help Center
+            </a>
           </div>
         </div>
       </div>
