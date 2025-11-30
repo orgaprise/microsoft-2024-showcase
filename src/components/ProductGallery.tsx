@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import ProductCard from "./ProductCard";
 import ImageLightbox from "./ImageLightbox";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { useCurrency } from "@/contexts/CurrencyContext";
 
 // Import all product images
 import product1 from "@/assets/product-1.png";
@@ -15,90 +17,102 @@ import product8 from "@/assets/product-8.png";
 import product9 from "@/assets/product-9.png";
 import product10 from "@/assets/product-10.png";
 
-const products = [
+interface ProductData {
+  image: string;
+  titleKey: string;
+  descriptionKey: string;
+  priceUSD: number;
+  originalPriceUSD?: number;
+  badgeKey?: string;
+  buyLink: string;
+}
+
+const productsData: ProductData[] = [
   {
     image: product1,
-    title: "Microsoft Office 365",
-    description: "Complete productivity suite with Word, Excel, PowerPoint and more for modern professionals.",
-    price: "$99.99",
-    originalPrice: "$149.99",
-    badge: "Best Seller",
-    buyLink: "#", // Replace with your link
+    titleKey: "product.office365.title",
+    descriptionKey: "product.office365.description",
+    priceUSD: 99.99,
+    originalPriceUSD: 149.99,
+    badgeKey: "badge.bestSeller",
+    buyLink: "#",
   },
   {
     image: product2,
-    title: "Windows 11 Pro",
-    description: "The most advanced Windows operating system with enhanced security and performance.",
-    price: "$199.99",
-    originalPrice: "$259.99",
-    badge: "Popular",
-    buyLink: "#", // Replace with your link
+    titleKey: "product.windows11.title",
+    descriptionKey: "product.windows11.description",
+    priceUSD: 199.99,
+    originalPriceUSD: 259.99,
+    badgeKey: "badge.popular",
+    buyLink: "#",
   },
   {
     image: product3,
-    title: "Visual Studio 2024",
-    description: "Professional IDE for developers with advanced debugging and collaboration tools.",
-    price: "$499.99",
-    buyLink: "#", // Replace with your link
+    titleKey: "product.visualstudio.title",
+    descriptionKey: "product.visualstudio.description",
+    priceUSD: 499.99,
+    buyLink: "#",
   },
   {
     image: product4,
-    title: "Microsoft Azure",
-    description: "Enterprise cloud computing platform for building, deploying, and managing applications.",
-    price: "$299.99",
-    badge: "Enterprise",
-    buyLink: "#", // Replace with your link
+    titleKey: "product.azure.title",
+    descriptionKey: "product.azure.description",
+    priceUSD: 299.99,
+    badgeKey: "badge.enterprise",
+    buyLink: "#",
   },
   {
     image: product5,
-    title: "Microsoft Teams Premium",
-    description: "Advanced collaboration and communication platform for modern workplaces.",
-    price: "$149.99",
-    originalPrice: "$199.99",
-    buyLink: "#", // Replace with your link
+    titleKey: "product.teams.title",
+    descriptionKey: "product.teams.description",
+    priceUSD: 149.99,
+    originalPriceUSD: 199.99,
+    buyLink: "#",
   },
   {
     image: product6,
-    title: "Power BI Pro",
-    description: "Business analytics solution for data visualization and intelligent insights.",
-    price: "$249.99",
-    buyLink: "#", // Replace with your link
+    titleKey: "product.powerbi.title",
+    descriptionKey: "product.powerbi.description",
+    priceUSD: 249.99,
+    buyLink: "#",
   },
   {
     image: product7,
-    title: "Dynamics 365",
-    description: "Enterprise resource planning and CRM solution for business transformation.",
-    price: "$399.99",
-    badge: "Enterprise",
-    buyLink: "#", // Replace with your link
+    titleKey: "product.dynamics.title",
+    descriptionKey: "product.dynamics.description",
+    priceUSD: 399.99,
+    badgeKey: "badge.enterprise",
+    buyLink: "#",
   },
   {
     image: product8,
-    title: "SQL Server 2024",
-    description: "Industry-leading database platform with AI-powered analytics capabilities.",
-    price: "$899.99",
-    buyLink: "#", // Replace with your link
+    titleKey: "product.sqlserver.title",
+    descriptionKey: "product.sqlserver.description",
+    priceUSD: 899.99,
+    buyLink: "#",
   },
   {
     image: product9,
-    title: "SharePoint 2024",
-    description: "Collaborative content management and document sharing platform.",
-    price: "$179.99",
-    buyLink: "#", // Replace with your link
+    titleKey: "product.sharepoint.title",
+    descriptionKey: "product.sharepoint.description",
+    priceUSD: 179.99,
+    buyLink: "#",
   },
   {
     image: product10,
-    title: "Microsoft Copilot",
-    description: "AI-powered assistant revolutionizing productivity across Microsoft 365 apps.",
-    price: "$349.99",
-    badge: "New",
-    buyLink: "#", // Replace with your link
+    titleKey: "product.copilot.title",
+    descriptionKey: "product.copilot.description",
+    priceUSD: 349.99,
+    badgeKey: "badge.new",
+    buyLink: "#",
   },
 ];
 
 const ProductGallery = () => {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const { t } = useLanguage();
+  const { formatPrice } = useCurrency();
 
   const openLightbox = (index: number) => {
     setCurrentIndex(index);
@@ -110,12 +124,23 @@ const ProductGallery = () => {
   };
 
   const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % products.length);
+    setCurrentIndex((prev) => (prev + 1) % productsData.length);
   };
 
   const goToPrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
+    setCurrentIndex((prev) => (prev - 1 + productsData.length) % productsData.length);
   };
+
+  // Transform products for display with translated content
+  const products = productsData.map((product) => ({
+    image: product.image,
+    title: t(product.titleKey),
+    description: t(product.descriptionKey),
+    price: formatPrice(product.priceUSD),
+    originalPrice: product.originalPriceUSD ? formatPrice(product.originalPriceUSD) : undefined,
+    badge: product.badgeKey ? t(product.badgeKey) : undefined,
+    buyLink: product.buyLink,
+  }));
 
   return (
     <section id="products" className="py-16 md:py-24 bg-secondary/30">
@@ -129,13 +154,13 @@ const ProductGallery = () => {
           className="mb-12 text-center"
         >
           <span className="inline-block rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary mb-4">
-            Our Products
+            {t("products.badge")}
           </span>
           <h2 className="font-display text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
-            Microsoft Software Collection
+            {t("products.title")}
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground md:text-lg">
-            Genuine licenses with instant digital delivery. Click any product to view details or buy now to purchase.
+            {t("products.description")}
           </p>
         </motion.div>
 

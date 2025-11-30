@@ -1,7 +1,11 @@
 import { motion } from "framer-motion";
 import { ShoppingCart, Phone, Mail } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageCurrencySelector from "./LanguageCurrencySelector";
 
 const Header = () => {
+  const { t } = useLanguage();
+
   return (
     <>
       {/* Top Bar */}
@@ -18,13 +22,15 @@ const Header = () => {
             </a>
           </div>
           <div className="flex items-center gap-3">
-            <a href="/blog" className="hover:opacity-80 transition-opacity">
-              Blog
+            <a href="/blog" className="hover:opacity-80 transition-opacity hidden sm:inline">
+              {t("header.blog")}
+            </a>
+            <div className="h-3 w-px bg-primary-foreground/30 hidden sm:block" />
+            <a href="/help" className="hover:opacity-80 transition-opacity hidden sm:inline">
+              {t("header.helpCenter")}
             </a>
             <div className="h-3 w-px bg-primary-foreground/30" />
-            <a href="/help" className="hover:opacity-80 transition-opacity">
-              Help Center
-            </a>
+            <LanguageCurrencySelector />
           </div>
         </div>
       </div>
@@ -57,7 +63,7 @@ const Header = () => {
                 SoftwareStore
               </span>
               <span className="text-[10px] text-muted-foreground font-medium tracking-wide uppercase">
-                Microsoft Partner
+                {t("header.partner")}
               </span>
             </div>
           </a>
@@ -68,19 +74,19 @@ const Header = () => {
               href="#products"
               className="text-sm font-medium text-foreground transition-colors hover:text-primary"
             >
-              Products
+              {t("header.products")}
             </a>
             <a
               href="#features"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
-              Why Choose Us
+              {t("header.whyChooseUs")}
             </a>
             <a
               href="#about"
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
-              Contact
+              {t("header.contact")}
             </a>
           </nav>
 
@@ -99,7 +105,7 @@ const Header = () => {
               href="#products"
               className="hidden sm:inline-flex rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25"
             >
-              Shop Now
+              {t("header.shopNow")}
             </a>
           </div>
         </div>

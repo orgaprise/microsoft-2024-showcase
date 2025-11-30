@@ -1,25 +1,28 @@
 import { motion } from "framer-motion";
 import { Shield, Zap, Clock } from "lucide-react";
-
-const features = [
-  {
-    icon: Shield,
-    title: "100% Genuine Licenses",
-    description: "All our products are sourced directly from Microsoft. Every license is authentic and fully supported.",
-  },
-  {
-    icon: Zap,
-    title: "Instant Digital Delivery",
-    description: "Get your license key within seconds after purchase. No waiting, start using your software immediately.",
-  },
-  {
-    icon: Clock,
-    title: "24/7 Customer Support",
-    description: "Our expert team is available around the clock to help with installation, activation, and any questions.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Features = () => {
+  const { t } = useLanguage();
+
+  const features = [
+    {
+      icon: Shield,
+      titleKey: "features.genuine.title",
+      descriptionKey: "features.genuine.description",
+    },
+    {
+      icon: Zap,
+      titleKey: "features.instant.title",
+      descriptionKey: "features.instant.description",
+    },
+    {
+      icon: Clock,
+      titleKey: "features.support.title",
+      descriptionKey: "features.support.description",
+    },
+  ];
+
   return (
     <section id="features" className="py-16 md:py-24 bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -32,14 +35,14 @@ const Features = () => {
           className="mb-12 text-center"
         >
           <span className="inline-block rounded-full bg-accent/10 px-4 py-1.5 text-sm font-semibold text-accent mb-4">
-            Why Choose Us
+            {t("features.badge")}
           </span>
           <h2 className="font-display text-3xl font-bold text-foreground md:text-4xl lg:text-5xl">
-            The Trusted Choice for
-            <span className="text-gradient"> Microsoft Software</span>
+            {t("features.title1")}
+            <span className="text-gradient"> {t("features.title2")}</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground md:text-lg">
-            As a certified Microsoft Partner, we provide genuine software with unmatched service and support.
+            {t("features.description")}
           </p>
         </motion.div>
 
@@ -58,10 +61,10 @@ const Features = () => {
                 <feature.icon className="h-7 w-7" />
               </div>
               <h3 className="mt-4 font-display text-xl font-semibold text-foreground">
-                {feature.title}
+                {t(feature.titleKey)}
               </h3>
               <p className="mt-2 text-muted-foreground">
-                {feature.description}
+                {t(feature.descriptionKey)}
               </p>
               
               {/* Decorative gradient */}
@@ -80,7 +83,7 @@ const Features = () => {
         >
           <div className="text-center">
             <p className="text-sm font-medium text-muted-foreground uppercase tracking-wider mb-6">
-              Trusted Security & Payment Partners
+              {t("features.trustedPartners")}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-8 opacity-60 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-500">
               <img 
