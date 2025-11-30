@@ -8,6 +8,8 @@ import LanguageLayout from "./layouts/LanguageLayout";
 import Index from "./pages/Index";
 import Contact from "./pages/Contact";
 import Products from "./pages/Products";
+import Shop from "./pages/Shop";
+import About from "./pages/About";
 import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
 
@@ -29,6 +31,8 @@ const App = () => (
               <Route index element={<Index />} />
               <Route path="contact" element={<Contact />} />
               <Route path="products" element={<Products />} />
+              <Route path="shop" element={<Shop />} />
+              <Route path="about" element={<About />} />
               <Route path="blog" element={<Blog />} />
             </Route>
             
@@ -37,6 +41,8 @@ const App = () => (
               <Route index element={<Index />} />
               <Route path="contacto" element={<Contact />} />
               <Route path="productos" element={<Products />} />
+              <Route path="tienda" element={<Shop />} />
+              <Route path="nosotros" element={<About />} />
               <Route path="blog" element={<Blog />} />
             </Route>
             

@@ -68,18 +68,24 @@ const Header = () => {
 
           {/* Navigation */}
           <nav className="hidden items-center gap-8 md:flex">
-            <a
-              href={`/${language}#products`}
+            <Link
+              to={localizedPath("/")}
               className="text-sm font-medium text-foreground transition-colors hover:text-primary"
             >
-              {t("header.products")}
-            </a>
-            <a
-              href={`/${language}#features`}
+              {t("header.home")}
+            </Link>
+            <Link
+              to={localizedPath("/shop")}
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
-              {t("header.whyChooseUs")}
-            </a>
+              {t("header.shop")}
+            </Link>
+            <Link
+              to={localizedPath("/about")}
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {t("header.about")}
+            </Link>
             <Link
               to={localizedPath("/contact")}
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
