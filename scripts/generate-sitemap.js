@@ -1,5 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Configuration
 const SITE_URL = process.env.SITE_URL || 'https://prisekeys.com';
@@ -46,7 +50,6 @@ function generateSitemap() {
     xml += `    <priority>${route.priority}</priority>\n`;
     
     // Add alternate language links (hreflang)
-    const lang = route.path.startsWith('/en') ? 'en' : 'es';
     const basePath = route.path.replace(/^\/(en|es)\/?/, '').split('/')[0] || '';
     const pair = routePairs[basePath];
     
@@ -102,4 +105,3 @@ console.log(`\n📊 Sitemap Summary:`);
 console.log(`   - Total URLs: ${routes.length}`);
 console.log(`   - Languages: English (en), Spanish (es)`);
 console.log(`   - Site URL: ${SITE_URL}`);
-console.log(`\n💡 Remember to update SITE_URL in scripts/generate-sitemap.js with your actual domain!`);
