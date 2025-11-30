@@ -7,6 +7,8 @@ import { CurrencyProvider } from "@/contexts/CurrencyContext";
 import LanguageLayout from "./layouts/LanguageLayout";
 import Index from "./pages/Index";
 import Contact from "./pages/Contact";
+import Products from "./pages/Products";
+import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,18 +28,16 @@ const App = () => (
             <Route path="/en" element={<LanguageLayout />}>
               <Route index element={<Index />} />
               <Route path="contact" element={<Contact />} />
-              <Route path="products" element={<Index />} />
-              <Route path="blog" element={<Index />} />
-              <Route path="help" element={<Index />} />
+              <Route path="products" element={<Products />} />
+              <Route path="blog" element={<Blog />} />
             </Route>
             
             {/* Spanish routes */}
             <Route path="/es" element={<LanguageLayout />}>
               <Route index element={<Index />} />
               <Route path="contacto" element={<Contact />} />
-              <Route path="productos" element={<Index />} />
-              <Route path="blog" element={<Index />} />
-              <Route path="ayuda" element={<Index />} />
+              <Route path="productos" element={<Products />} />
+              <Route path="blog" element={<Blog />} />
             </Route>
             
             {/* Catch-all */}

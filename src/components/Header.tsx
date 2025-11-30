@@ -26,10 +26,6 @@ const Header = () => {
             <Link to={localizedPath("/blog")} className="hover:opacity-80 transition-opacity hidden sm:inline">
               {t("header.blog")}
             </Link>
-            <div className="h-3 w-px bg-primary-foreground/30 hidden sm:block" />
-            <Link to={localizedPath("/help")} className="hover:opacity-80 transition-opacity hidden sm:inline">
-              {t("header.helpCenter")}
-            </Link>
             <div className="h-3 w-px bg-primary-foreground/30" />
             <LanguageCurrencySelector />
           </div>

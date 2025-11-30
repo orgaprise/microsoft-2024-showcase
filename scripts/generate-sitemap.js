@@ -15,14 +15,12 @@ const routes = [
   { path: '/en/contact', changefreq: 'monthly', priority: 0.7 },
   { path: '/en/products', changefreq: 'weekly', priority: 0.9 },
   { path: '/en/blog', changefreq: 'weekly', priority: 0.8 },
-  { path: '/en/help', changefreq: 'monthly', priority: 0.6 },
   
   // Spanish routes
   { path: '/es', changefreq: 'daily', priority: 1.0 },
   { path: '/es/contacto', changefreq: 'monthly', priority: 0.7 },
   { path: '/es/productos', changefreq: 'weekly', priority: 0.9 },
   { path: '/es/blog', changefreq: 'weekly', priority: 0.8 },
-  { path: '/es/ayuda', changefreq: 'monthly', priority: 0.6 },
 ];
 
 // Generate sitemap XML
@@ -39,7 +37,6 @@ function generateSitemap() {
     'contact': { en: '/en/contact', es: '/es/contacto' },
     'products': { en: '/en/products', es: '/es/productos' },
     'blog': { en: '/en/blog', es: '/es/blog' },
-    'help': { en: '/en/help', es: '/es/ayuda' },
   };
 
   routes.forEach(route => {
