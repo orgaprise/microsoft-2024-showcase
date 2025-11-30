@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Shield, Zap, Clock, Award, Users, Globe } from "lucide-react";
+import { Shield, Zap, Clock } from "lucide-react";
 
 const features = [
   {
@@ -16,21 +16,6 @@ const features = [
     icon: Clock,
     title: "24/7 Customer Support",
     description: "Our expert team is available around the clock to help with installation, activation, and any questions.",
-  },
-  {
-    icon: Award,
-    title: "Microsoft Certified Partner",
-    description: "We're an authorized Microsoft partner, ensuring you get the best prices and genuine products.",
-  },
-  {
-    icon: Users,
-    title: "Trusted by Thousands",
-    description: "Over 50,000 satisfied customers worldwide trust us for their Microsoft software needs.",
-  },
-  {
-    icon: Globe,
-    title: "Worldwide Service",
-    description: "We serve customers globally with localized support and instant delivery to any country.",
   },
 ];
 
