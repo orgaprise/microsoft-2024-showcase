@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-// Configuration - Update this with your actual domain
-const SITE_URL = process.env.SITE_URL || 'https://yourdomain.com';
+// Configuration
+const SITE_URL = process.env.SITE_URL || 'https://prisekeys.com';
 
 // Define all routes with their metadata
 const routes = [
