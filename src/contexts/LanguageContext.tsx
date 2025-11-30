@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, ReactNode } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export type Language = "en" | "es";
 
@@ -6,7 +7,40 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
+  localizedPath: (path: string) => string;
 }
+
+// Route mappings for each language
+export const routeMappings: Record<Language, Record<string, string>> = {
+  en: {
+    "/": "/en",
+    "/contact": "/en/contact",
+    "/products": "/en/products",
+    "/blog": "/en/blog",
+    "/help": "/en/help",
+  },
+  es: {
+    "/": "/es",
+    "/contact": "/es/contacto",
+    "/products": "/es/productos",
+    "/blog": "/es/blog",
+    "/help": "/es/ayuda",
+  },
+};
+
+// Reverse mapping to find base path from localized path
+export const reverseRouteMappings: Record<string, { lang: Language; basePath: string }> = {
+  "/en": { lang: "en", basePath: "/" },
+  "/en/contact": { lang: "en", basePath: "/contact" },
+  "/en/products": { lang: "en", basePath: "/products" },
+  "/en/blog": { lang: "en", basePath: "/blog" },
+  "/en/help": { lang: "en", basePath: "/help" },
+  "/es": { lang: "es", basePath: "/" },
+  "/es/contacto": { lang: "es", basePath: "/contact" },
+  "/es/productos": { lang: "es", basePath: "/products" },
+  "/es/blog": { lang: "es", basePath: "/blog" },
+  "/es/ayuda": { lang: "es", basePath: "/help" },
+};
 
 const translations: Record<Language, Record<string, string>> = {
   en: {
@@ -183,15 +217,42 @@ const translations: Record<Language, Record<string, string>> = {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-export const LanguageProvider = ({ children }: { children: ReactNode }) => {
-  const [language, setLanguage] = useState<Language>("en");
+interface LanguageProviderProps {
+  children: ReactNode;
+  lang: Language;
+}
+
+export const LanguageProvider = ({ children, lang }: LanguageProviderProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  const language: Language = lang === "es" ? "es" : "en";
 
   const t = (key: string): string => {
     return translations[language][key] || key;
   };
 
+  const localizedPath = (basePath: string): string => {
+    return routeMappings[language][basePath] || `/${language}${basePath}`;
+  };
+
+  const setLanguage = (newLang: Language) => {
+    // Find current base path from the URL
+    const currentPath = location.pathname;
+    const routeInfo = reverseRouteMappings[currentPath];
+    
+    if (routeInfo) {
+      // Navigate to the same page in the new language
+      const newPath = routeMappings[newLang][routeInfo.basePath];
+      navigate(newPath);
+    } else {
+      // Default to home page in new language
+      navigate(routeMappings[newLang]["/"]);
+    }
+  };
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t, localizedPath }}>
       {children}
     </LanguageContext.Provider>
   );
