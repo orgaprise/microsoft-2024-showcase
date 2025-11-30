@@ -3,6 +3,7 @@ import { ShoppingCart, Phone, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 import LanguageCurrencySelector from "./LanguageCurrencySelector";
+import CategoryNav from "./CategoryNav";
 
 const Header = () => {
   const { t, localizedPath, language } = useLanguage();
@@ -107,6 +108,9 @@ const Header = () => {
           </div>
         </div>
       </motion.header>
+
+      {/* Category Navigation */}
+      <CategoryNav />
     </>
   );
 };
