@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ShoppingCart, ExternalLink } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ProductCardProps {
   image: string;
@@ -24,6 +25,8 @@ const ProductCard = ({
   index, 
   onClick 
 }: ProductCardProps) => {
+  const { t } = useLanguage();
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 30 }}
@@ -113,7 +116,7 @@ const ProductCard = ({
             className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-primary py-3 font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 active:scale-[0.98]"
           >
             <ShoppingCart className="h-4 w-4" />
-            Buy Now
+            {t("products.buyNow")}
             <ExternalLink className="h-3.5 w-3.5 opacity-60" />
           </a>
         </div>

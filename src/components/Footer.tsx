@@ -1,6 +1,25 @@
 import { Phone, Mail, MapPin } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Footer = () => {
+  const { t } = useLanguage();
+
+  const quickLinks = [
+    { key: "footer.products", href: "#products" },
+    { key: "footer.whyChooseUs", href: "#features" },
+    { key: "footer.contactUs", href: "#about" },
+    { key: "footer.termsOfService", href: "#" },
+    { key: "footer.privacyPolicy", href: "#" },
+  ];
+
+  const productLinks = [
+    "Microsoft Office 365",
+    "Windows 11 Pro",
+    "Visual Studio",
+    "Microsoft Azure",
+    "Power BI Pro",
+  ];
+
   return (
     <footer id="about" className="border-t border-border bg-card">
       {/* Main Footer */}
@@ -26,11 +45,11 @@ const Footer = () => {
                 <span className="font-display text-lg font-bold text-foreground">
                   SoftwareStore
                 </span>
-                <p className="text-xs text-muted-foreground">Microsoft Certified Partner</p>
+                <p className="text-xs text-muted-foreground">{t("header.partner")}</p>
               </div>
             </div>
             <p className="mt-4 text-sm text-muted-foreground max-w-xs">
-              Your trusted source for genuine Microsoft software. Instant delivery, 24/7 support, and competitive prices.
+              {t("footer.description")}
             </p>
             
             {/* Partner Badge */}
@@ -45,15 +64,15 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-display font-semibold text-foreground">Quick Links</h4>
+            <h4 className="font-display font-semibold text-foreground">{t("footer.quickLinks")}</h4>
             <ul className="mt-4 space-y-3">
-              {["Products", "Why Choose Us", "Contact Us", "Terms of Service", "Privacy Policy"].map((link) => (
-                <li key={link}>
+              {quickLinks.map((link) => (
+                <li key={link.key}>
                   <a
-                    href="#"
+                    href={link.href}
                     className="text-sm text-muted-foreground transition-colors hover:text-primary"
                   >
-                    {link}
+                    {t(link.key)}
                   </a>
                 </li>
               ))}
@@ -62,9 +81,9 @@ const Footer = () => {
 
           {/* Products */}
           <div>
-            <h4 className="font-display font-semibold text-foreground">Products</h4>
+            <h4 className="font-display font-semibold text-foreground">{t("footer.products")}</h4>
             <ul className="mt-4 space-y-3">
-              {["Microsoft Office 365", "Windows 11 Pro", "Visual Studio", "Microsoft Azure", "Power BI Pro"].map((product) => (
+              {productLinks.map((product) => (
                 <li key={product}>
                   <a
                     href="#products"
@@ -79,7 +98,7 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="font-display font-semibold text-foreground">Contact Us</h4>
+            <h4 className="font-display font-semibold text-foreground">{t("footer.contactUs")}</h4>
             <ul className="mt-4 space-y-3">
               <li>
                 <a
@@ -138,7 +157,7 @@ const Footer = () => {
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} SoftwareStore. All rights reserved.
+              © {new Date().getFullYear()} SoftwareStore. {t("footer.allRightsReserved")}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <img 

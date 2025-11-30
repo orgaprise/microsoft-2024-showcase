@@ -1,7 +1,17 @@
 import { motion } from "framer-motion";
 import { Shield, Truck, CreditCard, Headphones } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
+  const { t } = useLanguage();
+
+  const trustBadges = [
+    { icon: Shield, labelKey: "hero.genuineLicense", descKey: "hero.authentic" },
+    { icon: Truck, labelKey: "hero.instantDelivery", descKey: "hero.digitalDownload" },
+    { icon: CreditCard, labelKey: "hero.securePayment", descKey: "hero.sslProtected" },
+    { icon: Headphones, labelKey: "hero.support", descKey: "hero.expertHelp" },
+  ];
+
   return (
     <section className="relative overflow-hidden bg-hero py-16 md:py-24">
       {/* Background Elements */}
@@ -22,11 +32,11 @@ const Hero = () => {
           >
             <Shield className="h-4 w-4 text-primary" />
             <span className="text-sm font-semibold text-primary">
-              Authorized Microsoft Partner
+              {t("hero.badge")}
             </span>
             <div className="h-4 w-px bg-primary/30" />
             <span className="text-sm text-muted-foreground">
-              100% Genuine Licenses
+              {t("hero.genuine")}
             </span>
           </motion.div>
 
@@ -37,8 +47,8 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl lg:text-7xl"
           >
-            Premium Microsoft
-            <span className="block text-gradient mt-2">Software Store</span>
+            {t("hero.title1")}
+            <span className="block text-gradient mt-2">{t("hero.title2")}</span>
           </motion.h1>
 
           {/* Description */}
@@ -48,8 +58,7 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl"
           >
-            Get genuine Microsoft software with instant digital delivery. 
-            Trusted by thousands of businesses worldwide with 24/7 support.
+            {t("hero.description")}
           </motion.p>
 
           {/* CTA Buttons */}
@@ -63,7 +72,7 @@ const Hero = () => {
               href="#products"
               className="group inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-4 font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/25 hover:scale-105"
             >
-              Browse Products
+              {t("hero.browseProducts")}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -83,7 +92,7 @@ const Hero = () => {
               href="#features"
               className="inline-flex items-center gap-2 rounded-xl border-2 border-border bg-card px-8 py-4 font-semibold text-foreground transition-all hover:border-primary/50 hover:bg-secondary"
             >
-              Why Choose Us
+              {t("hero.whyChooseUs")}
             </a>
           </motion.div>
 
@@ -94,12 +103,7 @@ const Hero = () => {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-4 md:gap-6"
           >
-            {[
-              { icon: Shield, label: "Genuine License", desc: "100% Authentic" },
-              { icon: Truck, label: "Instant Delivery", desc: "Digital Download" },
-              { icon: CreditCard, label: "Secure Payment", desc: "SSL Protected" },
-              { icon: Headphones, label: "24/7 Support", desc: "Expert Help" },
-            ].map((item, index) => (
+            {trustBadges.map((item, index) => (
               <div
                 key={index}
                 className="group flex flex-col items-center gap-2 rounded-2xl border border-border/50 bg-card/50 p-4 backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-card hover:shadow-lg"
@@ -107,8 +111,8 @@ const Hero = () => {
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
                   <item.icon className="h-6 w-6" />
                 </div>
-                <p className="font-semibold text-foreground text-sm">{item.label}</p>
-                <p className="text-xs text-muted-foreground">{item.desc}</p>
+                <p className="font-semibold text-foreground text-sm">{t(item.labelKey)}</p>
+                <p className="text-xs text-muted-foreground">{t(item.descKey)}</p>
               </div>
             ))}
           </motion.div>
