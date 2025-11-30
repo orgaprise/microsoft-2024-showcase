@@ -1,10 +1,11 @@
 import { motion } from "framer-motion";
 import { ShoppingCart, Phone, Mail } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 import LanguageCurrencySelector from "./LanguageCurrencySelector";
 
 const Header = () => {
-  const { t } = useLanguage();
+  const { t, localizedPath, language } = useLanguage();
 
   return (
     <>
@@ -22,13 +23,13 @@ const Header = () => {
             </a>
           </div>
           <div className="flex items-center gap-3">
-            <a href="/blog" className="hover:opacity-80 transition-opacity hidden sm:inline">
+            <Link to={localizedPath("/blog")} className="hover:opacity-80 transition-opacity hidden sm:inline">
               {t("header.blog")}
-            </a>
+            </Link>
             <div className="h-3 w-px bg-primary-foreground/30 hidden sm:block" />
-            <a href="/help" className="hover:opacity-80 transition-opacity hidden sm:inline">
+            <Link to={localizedPath("/help")} className="hover:opacity-80 transition-opacity hidden sm:inline">
               {t("header.helpCenter")}
-            </a>
+            </Link>
             <div className="h-3 w-px bg-primary-foreground/30" />
             <LanguageCurrencySelector />
           </div>
@@ -44,7 +45,7 @@ const Header = () => {
       >
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
           {/* Logo */}
-          <a href="/" className="flex items-center gap-3">
+          <Link to={localizedPath("/")} className="flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary shadow-lg shadow-primary/25">
               <svg
                 viewBox="0 0 23 23"
@@ -66,28 +67,28 @@ const Header = () => {
                 {t("header.partner")}
               </span>
             </div>
-          </a>
+          </Link>
 
           {/* Navigation */}
           <nav className="hidden items-center gap-8 md:flex">
             <a
-              href="#products"
+              href={`/${language}#products`}
               className="text-sm font-medium text-foreground transition-colors hover:text-primary"
             >
               {t("header.products")}
             </a>
             <a
-              href="#features"
+              href={`/${language}#features`}
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {t("header.whyChooseUs")}
             </a>
-            <a
-              href="#about"
+            <Link
+              to={localizedPath("/contact")}
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {t("header.contact")}
-            </a>
+            </Link>
           </nav>
 
           {/* Actions */}
@@ -102,7 +103,7 @@ const Header = () => {
               </span>
             </button>
             <a
-              href="#products"
+              href={`/${language}#products`}
               className="hidden sm:inline-flex rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25"
             >
               {t("header.shopNow")}

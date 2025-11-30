@@ -3,7 +3,7 @@ import { Shield, Truck, CreditCard, Headphones } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Hero = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const trustBadges = [
     { icon: Shield, labelKey: "hero.genuineLicense", descKey: "hero.authentic" },
@@ -69,7 +69,7 @@ const Hero = () => {
             className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
             <a
-              href="#products"
+              href={`/${language}#products`}
               className="group inline-flex items-center gap-2 rounded-xl bg-primary px-8 py-4 font-semibold text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/25 hover:scale-105"
             >
               {t("hero.browseProducts")}
@@ -89,7 +89,7 @@ const Hero = () => {
               </svg>
             </a>
             <a
-              href="#features"
+              href={`/${language}#features`}
               className="inline-flex items-center gap-2 rounded-xl border-2 border-border bg-card px-8 py-4 font-semibold text-foreground transition-all hover:border-primary/50 hover:bg-secondary"
             >
               {t("hero.whyChooseUs")}

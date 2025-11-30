@@ -1,13 +1,14 @@
 import { Phone, Mail, MapPin } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
-  const { t } = useLanguage();
+  const { t, localizedPath, language } = useLanguage();
 
   const quickLinks = [
-    { key: "footer.products", href: "#products" },
-    { key: "footer.whyChooseUs", href: "#features" },
-    { key: "footer.contactUs", href: "#about" },
+    { key: "footer.products", href: `/${language}#products` },
+    { key: "footer.whyChooseUs", href: `/${language}#features` },
+    { key: "footer.contactUs", path: "/contact" },
     { key: "footer.termsOfService", href: "#" },
     { key: "footer.privacyPolicy", href: "#" },
   ];
@@ -27,7 +28,7 @@ const Footer = () => {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-3">
+            <Link to={localizedPath("/")} className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary">
                 <svg
                   viewBox="0 0 23 23"
@@ -47,7 +48,7 @@ const Footer = () => {
                 </span>
                 <p className="text-xs text-muted-foreground">{t("header.partner")}</p>
               </div>
-            </div>
+            </Link>
             <p className="mt-4 text-sm text-muted-foreground max-w-xs">
               {t("footer.description")}
             </p>
@@ -68,12 +69,21 @@ const Footer = () => {
             <ul className="mt-4 space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.key}>
-                  <a
-                    href={link.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-primary"
-                  >
-                    {t(link.key)}
-                  </a>
+                  {link.path ? (
+                    <Link
+                      to={localizedPath(link.path)}
+                      className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                    >
+                      {t(link.key)}
+                    </Link>
+                  ) : (
+                    <a
+                      href={link.href}
+                      className="text-sm text-muted-foreground transition-colors hover:text-primary"
+                    >
+                      {t(link.key)}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
@@ -86,7 +96,7 @@ const Footer = () => {
               {productLinks.map((product) => (
                 <li key={product}>
                   <a
-                    href="#products"
+                    href={`/${language}#products`}
                     className="text-sm text-muted-foreground transition-colors hover:text-primary"
                   >
                     {product}
