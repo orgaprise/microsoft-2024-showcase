@@ -58,7 +58,7 @@ const Header = () => {
             </div>
             <div className="flex flex-col">
               <span className="font-display text-lg font-bold text-foreground leading-tight">
-                SoftwareStore
+                PRISE KEYS
               </span>
               <span className="text-[10px] text-muted-foreground font-medium tracking-wide uppercase">
                 {t("header.partner")}

@@ -44,7 +44,7 @@ const Footer = () => {
               </div>
               <div>
                 <span className="font-display text-lg font-bold text-foreground">
-                  SoftwareStore
+                  PRISE KEYS
                 </span>
                 <p className="text-xs text-muted-foreground">{t("header.partner")}</p>
               </div>
@@ -167,7 +167,7 @@ const Footer = () => {
         <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center justify-between gap-4 text-center sm:flex-row sm:text-left">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} SoftwareStore. {t("footer.allRightsReserved")}
+              © {new Date().getFullYear()} PRISE KEYS. {t("footer.allRightsReserved")}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4">
               <img 
